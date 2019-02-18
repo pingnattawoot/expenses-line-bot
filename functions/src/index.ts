@@ -3,15 +3,15 @@ import * as express from 'express'
 import * as line from '@line/bot-sdk'
 import config from './config'
 
-import { handleEvent } from './eventHandler'
+import { handleEvent } from './handlers'
 
 const app = express()
 
 app.get('/webhook', (req, res) => {
-  res.send('hahahahhahah')
+  res.send('OK!')
 })
 
-app.post('/webhook', line.middleware(config.lineSecret), (req, res) => {
+app.post('/webhook', line.middleware(config), (req, res) => {
   console.log('event', JSON.stringify(req.body, null, 4))
 
   // req.body.events should be an array of events
