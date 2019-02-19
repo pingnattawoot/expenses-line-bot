@@ -1,8 +1,14 @@
 import * as line from '@line/bot-sdk'
 import { replyText } from './utils'
+import * as moment from 'moment'
 
 function handleText(message: line.TextMessage, replyToken: string) {
-  return replyText(replyToken, `-> ${message.text}`)
+  const dateNow = moment()
+    .utcOffset(7)
+    .format('dddd, MMMM Do YYYY, h:mm:ss a')
+  const replyMessage = `${message.text} \n-------------------\n${dateNow}`
+
+  return replyText(replyToken, replyMessage)
 }
 
 function handleImage(message: line.ImageEventMessage, replyToken: string) {
