@@ -1,8 +1,12 @@
 import * as line from '@line/bot-sdk'
 import { replyText } from './utils'
 import * as moment from 'moment'
+import { getDatabase } from '../database'
 
 function handleText(message: line.TextMessage, replyToken: string) {
+  const db = getDatabase()
+  db.ref('test').set(message.text)
+
   const dateNow = moment()
     .utcOffset(7)
     .format('dddd, MMMM Do YYYY, h:mm:ss a')

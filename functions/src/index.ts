@@ -2,10 +2,12 @@ import * as functions from 'firebase-functions'
 import * as express from 'express'
 import * as line from '@line/bot-sdk'
 import config from './config'
+import * as database from './database'
 
 import { handleEvent } from './handlers'
 
 const app = express()
+database.initializeDatabase()
 
 app.get('/webhook', (req, res) => {
   res.send('OK!')
